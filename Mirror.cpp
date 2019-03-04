@@ -18,7 +18,7 @@ void Mirror::run(string out)
         print();
         cout << '\n';
 
-        while(generateNext() != false)
+        while(generateNext() != false && gen != 1000)
         {
             this_thread::sleep_for(chrono::seconds(2));
             gen++;
@@ -37,7 +37,7 @@ void Mirror::run(string out)
         cout << '\n';
         cin.get();
 
-        while(generateNext() != false)
+        while(generateNext() != false && gen != 1000)
         {
             gen++;
             cout << "Generation: " << gen << endl;
@@ -57,7 +57,7 @@ void Mirror::run(string out)
         write(outName);
         printFile << endl;
 
-        while(generateNext() != false)
+        while(generateNext() != false && gen != 1000)
         {
             gen++;
             printFile << "Generation: " << gen << endl;
@@ -76,7 +76,7 @@ void Mirror::run(string out)
         cout << '\n';
         cin.get();
 
-        while(generateNext() != false)
+        while(generateNext() != false && gen != 1000)
         {
             gen++;
             cout << "Generation: " << gen << endl;
