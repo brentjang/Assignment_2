@@ -55,13 +55,36 @@ void UserIn::checkDensity()
     }
 }
 
+void UserIn::checkInput()
+{
+    bool flag = false;
+    cout << "(1) Custom\n(2) Import File\n(3) Quit" << endl;
+    cout << "Please Select Board (Enter the number next to the selection): ";
+    cin >> input;
+    while(!flag)
+    {
+        if(!cin.fail() && (input >= 1 && input <= 4))
+        {
+            flag = true;
+        }
+        else
+        {
+            cout << "Invalid input." << endl;
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout << "(1) Custom\n(2) Import File\n(3) Quit" << endl;
+            cout << "Please Select Board (Enter the number next to the selection): ";
+            cin >> input;
+        }
+    }
+}
+
 void UserIn::checkMode()
 {
     bool flag = false;
     cout << "(1) Classic\n(2) Doughnut\n(3) Mirror\n(4) Quit" << endl;
     cout << "Please Select Board Type (Enter the number next to the selection): ";
     cin >> mode;
-    cout << '\n';
     while(!flag)
     {
         if(!cin.fail() && (mode >= 1 && mode <= 4))
@@ -86,7 +109,6 @@ void UserIn::checkOut()
     cout << "(1) Pause\n(2) Enter\n(3) File\n(4) Quit" << endl;
     cout << "Please Output Type (Enter the number next to the selection): ";
     cin >> out;
-    cout << '\n';
     while(!flag)
     {
         if(!cin.fail() && (out >= 1 && out <= 4))
@@ -165,6 +187,11 @@ double UserIn::getDensity()
 string UserIn::getFileName()
 {
     return filename;
+}
+
+int UserIn::getInput()
+{
+    return input;
 }
 
 int UserIn::getMode()
