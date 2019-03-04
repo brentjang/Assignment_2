@@ -8,88 +8,6 @@
 
 using namespace std;
 
-void Doughnut::run(string out)
-{
-    int gen = 0;
-
-
-    if(out == "1")
-    {
-        cout << "Generation: " << gen << endl;
-        makeDoughnut();
-        print();
-        cout << '\n';
-
-        while(generateNext() != false && gen != 1000)
-        {
-            this_thread::sleep_for(chrono::seconds(2));
-            gen++;
-            cout << "Generation: " << gen << endl;
-            makeDoughnut();
-            print();
-            cout << '\n';
-        }
-    }
-    else if(out == "2")
-    {
-        cin.get();
-        cout << "Generation: " << gen << endl;
-        makeDoughnut();
-        print();
-        cout << '\n';
-        cin.get();
-
-        while(generateNext() != false && gen != 1000)
-        {
-            gen++;
-            cout << "Generation: " << gen << endl;
-            makeDoughnut();
-            print();
-            cin.get();
-        }
-    }
-    else if(out == "3")
-    {
-        string outName;
-        cout << "Please enter output file name: " << endl;
-        cin >> outName;
-        ofstream printFile(outName, ios_base::app);
-        printFile << "Generation: " << gen << endl;
-        makeDoughnut();
-        write(outName);
-        printFile << endl;
-
-        while(generateNext() != false && gen != 1000)
-        {
-            gen++;
-            printFile << "Generation: " << gen << endl;
-            makeDoughnut();
-            write(outName);
-        }
-    }
-    else if(out == "4") {}
-    else
-    {
-        cout << "DEFAULT MODE [Press any key to continue...]" << endl;
-        cin.get();
-        cout << "Generation: " << gen << endl;
-        makeDoughnut();
-        print();
-        cout << '\n';
-        cin.get();
-
-        while(generateNext() != false && gen != 1000)
-        {
-            gen++;
-            cout << "Generation: " << gen << endl;
-            makeDoughnut();
-            print();
-            cin.get();
-        }
-    }
-    cout << "Program Exit." << endl;
-}
-
 void Doughnut::makeDoughnut()
 {
     //top row wrap to bottom
@@ -145,4 +63,90 @@ void Doughnut::makeDoughnut()
     {
         gameBoard->genBoard[0][0] = 'X';
     }
+}
+
+void Doughnut::run(int out)
+{
+    int gen = 0;
+
+    //pause between generations
+    if(out == 1)
+    {
+        cout << "Generation: " << gen << endl;
+        makeDoughnut();
+        print();
+        cout << '\n';
+
+        while(generateNext() != false && gen != 1000)
+        {
+            this_thread::sleep_for(chrono::seconds(2));
+            gen++;
+            cout << "Generation: " << gen << endl;
+            makeDoughnut();
+            print();
+            cout << '\n';
+        }
+    }
+
+    //get key before next generation
+    else if(out == 2)
+    {
+        cin.get();
+        cout << "Generation: " << gen << endl;
+        makeDoughnut();
+        print();
+        cout << '\n';
+        cin.get();
+
+        while(generateNext() != false && gen != 1000)
+        {
+            gen++;
+            cout << "Generation: " << gen << endl;
+            makeDoughnut();
+            print();
+            cin.get();
+        }
+    }
+
+    //output to file
+    else if(out == 3)
+    {
+        string outName;
+        cout << "Please enter output file name: " << endl;
+        cin >> outName;
+        ofstream printFile(outName, ios_base::app);
+        printFile << "Generation: " << gen << endl;
+        makeDoughnut();
+        write(outName);
+        printFile << endl;
+
+        while(generateNext() != false && gen != 1000)
+        {
+            gen++;
+            printFile << "Generation: " << gen << endl;
+            makeDoughnut();
+            write(outName);
+        }
+    }
+    else if(out == 4) {}
+    else
+    {
+        cout << "DEFAULT MODE [Press any key to continue...]" << endl;
+        cin.get();
+        cout << "Generation: " << gen << endl;
+        makeDoughnut();
+        print();
+        cout << '\n';
+        cin.get();
+
+        while(generateNext() != false && gen != 1000)
+        {
+            gen++;
+            cout << "Generation: " << gen << endl;
+            makeDoughnut();
+            print();
+            cin.get();
+        }
+    }
+    cout << "Program Exit." << endl;
 }

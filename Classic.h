@@ -8,6 +8,6 @@ class Classic: public Game
 {
 public:
     using Game::Game;
-    void run(string out);
+    void run(int out);
     ~Classic() {};
 };

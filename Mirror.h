@@ -9,6 +9,6 @@ class Mirror: public Game
 public:
     using Game::Game;
     void makeMirror();
-    void run(string out);
+    void run(int out);
     ~Mirror() {};
 };

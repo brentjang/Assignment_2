@@ -11,9 +11,9 @@ public:
     Game() {};
     Game(int gRow, int gCol, char** board);
     ~Game() {};
-    bool stable(char** board);
-    bool empty();
     bool generateNext();
+    bool empty();
+    bool stable(char** board);
     void copy(char** board);
     void print();
     void write(string filename);

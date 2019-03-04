@@ -8,10 +8,12 @@
 
 using namespace std;
 
-void Classic::run(string out)
+void Classic::run(int out)
 {
     int gen = 0;
-    if(out == "1")
+
+    //pause between generations
+    if(out == 1)
     {
         cout << "Generation: " << gen << endl;
         print();
@@ -26,7 +28,9 @@ void Classic::run(string out)
             cout << '\n';
         }
     }
-    else if(out == "2")
+
+    //get key before next generation
+    else if(out == 2)
     {
         cin.get();
         cout << "Generation: " << gen << endl;
@@ -34,7 +38,7 @@ void Classic::run(string out)
         cout << '\n';
         cin.get();
 
-        while(generateNext() != false || gen != 1000)
+        while(generateNext() != false && gen != 1000)
         {
             gen++;
             cout << "Generation: " << gen << endl;
@@ -42,7 +46,9 @@ void Classic::run(string out)
             cin.get();
         }
     }
-    else if(out == "3")
+
+    //output to file
+    else if(out == 3)
     {
         string outName;
         cout << "Please enter output file name: " << endl;
@@ -59,7 +65,7 @@ void Classic::run(string out)
             write(outName);
         }
     }
-    else if(out == "4") {}
+    else if(out == 4) {}
     else
     {
         cout << "DEFAULT MODE [Press any key to continue...]" << endl;

@@ -8,86 +8,6 @@
 
 using namespace std;
 
-void Mirror::run(string out)
-{
-    int gen = 0;
-    if(out == "1")
-    {
-        cout << "Generation: " << gen << endl;
-        makeMirror();
-        print();
-        cout << '\n';
-
-        while(generateNext() != false && gen != 1000)
-        {
-            this_thread::sleep_for(chrono::seconds(2));
-            gen++;
-            cout << "Generation: " << gen << endl;
-            makeMirror();
-            print();
-            cout << '\n';
-        }
-    }
-    else if(out == "2")
-    {
-        cin.get();
-        cout << "Generation: " << gen << endl;
-        makeMirror();
-        print();
-        cout << '\n';
-        cin.get();
-
-        while(generateNext() != false && gen != 1000)
-        {
-            gen++;
-            cout << "Generation: " << gen << endl;
-            makeMirror();
-            print();
-            cin.get();
-        }
-    }
-    else if(out == "3")
-    {
-        string outName;
-        cout << "Please enter output file name: " << endl;
-        cin >> outName;
-        ofstream printFile(outName, ios_base::app);
-        printFile << "Generation: " << gen << endl;
-        makeMirror();
-        write(outName);
-        printFile << endl;
-
-        while(generateNext() != false && gen != 1000)
-        {
-            gen++;
-            printFile << "Generation: " << gen << endl;
-            makeMirror();
-            write(outName);
-        }
-    }
-    else if(out == "4") {}
-    else
-    {
-        cout << "DEFAULT MODE [Press any key to continue...]" << endl;
-        cin.get();
-        cout << "Generation: " << gen << endl;
-        makeMirror();
-        print();
-        cout << '\n';
-        cin.get();
-
-        while(generateNext() != false && gen != 1000)
-        {
-            gen++;
-            cout << "Generation: " << gen << endl;
-            makeMirror();
-            print();
-            cin.get();
-        }
-    }
-    cout << "Program Exit." << endl;
-}
-
 void Mirror::makeMirror()
 {
     //top row mirror
@@ -143,4 +63,90 @@ void Mirror::makeMirror()
     {
         gameBoard->genBoard[gameRows-1][gameCols-1] = 'X';
     }
+}
+
+void Mirror::run(int out)
+{
+    int gen = 0;
+
+    //pause between generations
+    if(out == 1)
+    {
+        cout << "Generation: " << gen << endl;
+        makeMirror();
+        print();
+        cout << '\n';
+
+        while(generateNext() != false && gen != 1000)
+        {
+            this_thread::sleep_for(chrono::seconds(2));
+            gen++;
+            cout << "Generation: " << gen << endl;
+            makeMirror();
+            print();
+            cout << '\n';
+        }
+    }
+
+    //get key before next generation
+    else if(out == 2)
+    {
+        cin.get();
+        cout << "Generation: " << gen << endl;
+        makeMirror();
+        print();
+        cout << '\n';
+        cin.get();
+
+        while(generateNext() != false && gen != 1000)
+        {
+            gen++;
+            cout << "Generation: " << gen << endl;
+            makeMirror();
+            print();
+            cin.get();
+        }
+    }
+
+    //output to file
+    else if(out == 3)
+    {
+        string outName;
+        cout << "Please enter output file name: " << endl;
+        cin >> outName;
+        ofstream printFile(outName, ios_base::app);
+        printFile << "Generation: " << gen << endl;
+        makeMirror();
+        write(outName);
+        printFile << endl;
+
+        while(generateNext() != false && gen != 1000)
+        {
+            gen++;
+            printFile << "Generation: " << gen << endl;
+            makeMirror();
+            write(outName);
+        }
+    }
+    else if(out == 4) {}
+    else
+    {
+        cout << "DEFAULT MODE [Press any key to continue...]" << endl;
+        cin.get();
+        cout << "Generation: " << gen << endl;
+        makeMirror();
+        print();
+        cout << '\n';
+        cin.get();
+
+        while(generateNext() != false && gen != 1000)
+        {
+            gen++;
+            cout << "Generation: " << gen << endl;
+            makeMirror();
+            print();
+            cin.get();
+        }
+    }
+    cout << "Program Exit." << endl;
 }

@@ -13,6 +13,7 @@ Game::Game(int gRow, int gCol, char** board)
 
 bool Game::generateNext()
 {
+    //initializes a board to copy onto
     char** nextBoard = new char*[gameRows];
     for(int i = 0; i < gameRows; i++)
     {
@@ -26,9 +27,10 @@ bool Game::generateNext()
         }
     }
 
-    for(int x = 1; x < gameRows-1; x++)
+    //checks neighbors for next generation
+    for(int x = 1; x <= gameRows-2; x++)
     {
-        for(int y = 1; y < gameCols-1; y++)
+        for(int y = 1; y <= gameCols-2; y++)
         {
             int numNeighbors = gameBoard->getNeighbors(x,y);
             if(numNeighbors <= 1)
@@ -50,6 +52,7 @@ bool Game::generateNext()
         }
     }
 
+    //generation stops at empty, stable, or 1000 generations
     if(!empty() && !stable(nextBoard))
     {
         copy(nextBoard);
@@ -60,6 +63,7 @@ bool Game::generateNext()
     }
 }
 
+//checks if whole board is empty
 bool Game::empty()
 {
     for(int i = 0; i < gameRows; i++)
@@ -75,6 +79,7 @@ bool Game::empty()
     return true;
 }
 
+//checks if the last generation is the same as new one
 bool Game::stable(char** board)
 {
     bool flag = true;

@@ -9,6 +9,8 @@ private:
     int rows;
     int cols;
     double density;
+    int mode;
+    int out;
 
 public:
     UserIn() {};
@@ -16,9 +18,13 @@ public:
     void checkRows();
     void checkCols();
     void checkDensity();
-    void readFile(string filename);
+    void checkMode();
+    void checkOut();
+    void readFile();
     int getRows();
     int getCols();
     double getDensity();
     string getFileName();
+    int getMode();
+    int getOut();
 };

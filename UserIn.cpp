@@ -5,40 +5,6 @@
 
 using namespace std;
 
-void UserIn::readFile(string name)
-{
-    filename = name;
-    int lineCount = 0;
-    ifstream file(filename);
-    if(file.good())
-    {
-        string line;
-        while(getline(file, line))
-        {
-            lineCount++;
-            if(line.size() > 0)
-            {
-                switch (lineCount)
-                {
-                    case 1:
-                        rows = stoi(line);
-                        break;
-                    case 2:
-                        cols = stoi(line);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-        file.close();
-    }
-    else
-    {
-        cout << "Not a File" << endl;
-    }
-}
-
 void UserIn::checkRows()
 {
     cout << "Please enter number of rows: ";
@@ -52,6 +18,7 @@ void UserIn::checkRows()
         cin >> rows;
     }
 }
+
 void UserIn::checkCols()
 {
     cout << "Please enter number of columns: ";
@@ -65,6 +32,7 @@ void UserIn::checkCols()
         cin >> cols;
     }
 }
+
 void UserIn::checkDensity()
 {
     bool flag = false;
@@ -87,10 +55,103 @@ void UserIn::checkDensity()
     }
 }
 
+void UserIn::checkMode()
+{
+    bool flag = false;
+    cout << "(1) Classic\n(2) Doughnut\n(3) Mirror\n(4) Quit" << endl;
+    cout << "Please Select Board Type (Enter the number next to the selection): ";
+    cin >> mode;
+    cout << '\n';
+    while(!flag)
+    {
+        if(!cin.fail() && (mode >= 1 && mode <= 4))
+        {
+            flag = true;
+        }
+        else
+        {
+            cout << "Invalid input." << endl;
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout << "(1) Classic\n(2) Doughnut\n(3) Mirror\n(4) Quit" << endl;
+            cout << "Please Select Board Type (Enter the number next to the selection): ";
+            cin >> mode;
+        }
+    }
+}
+
+void UserIn::checkOut()
+{
+    bool flag = false;
+    cout << "(1) Pause\n(2) Enter\n(3) File\n(4) Quit" << endl;
+    cout << "Please Output Type (Enter the number next to the selection): ";
+    cin >> out;
+    cout << '\n';
+    while(!flag)
+    {
+        if(!cin.fail() && (out >= 1 && out <= 4))
+        {
+            flag = true;
+        }
+        else
+        {
+            cout << "Invalid input." << endl;
+            cin.clear();
+            cin.ignore(256,'\n');
+            cout << "(1) Pause\n(2) Enter\n(3) File\n(4) Quit" << endl;
+            cout << "Please Output Type (Enter the number next to the selection): ";
+            cin >> out;
+            cout << '\n';
+        }
+    }
+}
+
+void UserIn::readFile()
+{
+    bool flag = false;
+    int lineCount = 0;
+
+    while(!flag)
+    {
+        cout << "Please enter a file name [include extension .txt]: ";
+        cin >> filename;
+        ifstream file(filename);
+        if(file.good())
+        {
+            string line;
+            while(getline(file, line))
+            {
+                lineCount++;
+                if(line.size() > 0)
+                {
+                    switch (lineCount)
+                    {
+                        case 1:
+                            rows = stoi(line);
+                            break;
+                        case 2:
+                            cols = stoi(line);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            flag = true;
+            file.close();
+        }
+        else
+        {
+            cout << "Not a File" << endl;
+        }
+    }
+}
+
 int UserIn::getRows()
 {
     return rows;
 }
+
 int UserIn::getCols()
 {
     return cols;
@@ -104,4 +165,14 @@ double UserIn::getDensity()
 string UserIn::getFileName()
 {
     return filename;
+}
+
+int UserIn::getMode()
+{
+    return mode;
+}
+
+int UserIn::getOut()
+{
+    return out;
 }

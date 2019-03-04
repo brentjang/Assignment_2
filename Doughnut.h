@@ -9,6 +9,6 @@ class Doughnut: public Game
 public:
     using Game::Game;
     void makeDoughnut();
-    void run(string out);
+    void run(int out);
     ~Doughnut() {};
 };

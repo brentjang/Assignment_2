@@ -22,6 +22,8 @@ Board::Board(int r, int c)
     {
         genBoard[i] = new char[cols];
     }
+
+    //initializes whole board to empty
     for(int n = 0; n < rows; n++)
     {
         for(int m = 0; m < cols; m++)
@@ -40,6 +42,8 @@ Board::Board(int r, int c, char** board)
     {
         genBoard[i] = new char[cols];
     }
+
+    //initializes whole board to empty
     for(int n = 0; n < rows; n++)
     {
         for(int m = 0; m < cols; m++)
@@ -47,6 +51,7 @@ Board::Board(int r, int c, char** board)
             genBoard[n][m] = '-';
         }
     }
+
     for(int a = 1; a <= rows-2; a++)
     {
         for(int b = 1; b <= cols-2; b++)
@@ -67,9 +72,9 @@ Board::~Board()
 
 void Board::densityFill(double density)
 {
-    for(int j = 1; j < rows-1; j++)
+    for(int j = 1; j <= rows-2; j++)
     {
-        for(int k = 1; k < cols-1; k++)
+        for(int k = 1; k <= cols-2; k++)
         {
             float random = ((float) rand()/RAND_MAX);
             if(density > random)
@@ -112,19 +117,26 @@ void Board::fileFill(string name)
     }
 }
 
-char** Board::getBoard()
+int Board::getNeighbors(int x, int y)
 {
-    return genBoard;
-}
+    int sumN = 0;
+    for(int i = -1; i <= 1; i++)
+    {
+        for(int j = -1; j <= 1; j++)
+        {
+            if(genBoard[x + i][y + j] == 'X')
+            {
+                sumN++;
+            }
+        }
+    }
 
-int Board::getRows()
-{
-    return rows;
-}
-
-int Board::getCols()
-{
-    return cols;
+    //accounts for the cell at X,Y
+    if(genBoard[x][y] == 'X')
+    {
+        sumN -= 1;
+    }
+    return sumN;
 }
 
 void Board::printBoard()
@@ -154,22 +166,17 @@ void Board::writeBoard(string filename)
     printFile << '\n';
 }
 
-int Board::getNeighbors(int x, int y)
+char** Board::getBoard()
 {
-    int sumN = 0;
-    for(int i = -1; i <= 1; i++)
-    {
-        for(int j = -1; j <= 1; j++)
-        {
-            if(genBoard[x + i][y + j] == 'X')
-            {
-                sumN++;
-            }
-        }
-    }
-    if(genBoard[x][y] == 'X')
-    {
-        sumN -= 1;
-    }
-    return sumN;
+    return genBoard;
+}
+
+int Board::getRows()
+{
+    return rows;
+}
+
+int Board::getCols()
+{
+    return cols;
 }
