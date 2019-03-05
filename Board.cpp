@@ -141,9 +141,9 @@ int Board::getNeighbors(int x, int y)
 
 void Board::printBoard()
 {
-    for(int i = 0; i < rows; i++)
+    for(int i = 1; i <= rows-2; i++)
     {
-        for(int j = 0; j < cols; j++)
+        for(int j = 1; j < cols-2; j++)
         {
             cout << genBoard[i][j];
         }
@@ -155,9 +155,9 @@ void Board::printBoard()
 void Board::writeBoard(string filename)
 {
     ofstream printFile(filename, ios_base::app);
-    for(int i = 0; i < rows; i++)
+    for(int i = 1; i < rows-2; i++)
     {
-        for(int j = 0; j < cols; j++)
+        for(int j = 1; j < cols-2; j++)
         {
             printFile << genBoard[i][j];
         }
